@@ -30,7 +30,7 @@ async function sendTransactionWithAccessList(privateKey) {
   //Make sure that you have approved this number of batches before running the script!
   let batchNumber = 1;
 
-  // Encode the function signature and parameters for the transaction
+  //Encode the function signature and parameters for the transaction
   const functionSignature = web3Instance.eth.abi.encodeFunctionSignature({
     name: 'burnBatch',
     type: 'function',
@@ -83,10 +83,10 @@ async function sendTransactionWithAccessList(privateKey) {
   console.log('Transaction Receipt:', receipt);
 }
 
-// Define your private key
+//Define your private key
 const privateKey = 'Your_private_key';
 
-// Call the sendTransactionWithAccessList function with the private key
-// This example is for the Polygon network.
-// If you want to use this script on a different network, modify the RPC URL and contract address.
+//Call the sendTransactionWithAccessList function with the private key
+//This example is for the Polygon network.
+//If you want to use this script on a different network, modify the RPC URL and contract address.
 sendTransactionWithAccessList(privateKey);
