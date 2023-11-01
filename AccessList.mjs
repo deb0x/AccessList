@@ -6,11 +6,11 @@ import web3 from 'web3'; // Import web3
 import { contractABI } from './contractABI.js'; // Import the contract ABI
 import axios from 'axios';
 
-// This example is made for Polygon network!
-// The purpose of this script is to assist users in executing transactions with a lower gas amount than usual. 
-// For this script to work, the user needs to have the exact amount of tokens they want to burn in their wallet.
-// For example, if a user wants to burn 4 batches (10,000,000 XEN tokens) and they have 10,000,001 XEN tokens, 
-// the memory storage keys will not be generated in the correct order, and the transaction will be executed without offering the user a discount.
+//The current values are configured for the Polygon Netwrok!
+//The purpose of this script is to assist users in executing EIP-2930 "Access List" transactions on EVM compatible blockchains that support EIP-2930. 
+//For this script to work, the user needs to have the exact amount of tokens they want to burn in their wallet.
+//For example, if a user wants to burn 4 batches (10,000,000 XEN tokens) and they have 10,000,001 XEN tokens, 
+//the memory storage keys will not be generated in the correct order, and the transaction will be executed without offering the user a discount.
 
 async function sendTransactionWithAccessList(privateKey) {
   //Define the node URL for the provider. This depends on the network you want to connect to.
@@ -64,7 +64,7 @@ async function sendTransactionWithAccessList(privateKey) {
   //Extract the access list from the result
   let accessList = accessListResult.accessList;
   //Create a contract instance using the contract address and ABI
-  const deb0xContract = new Contract(contractAddress, contractABI, wallet);
+  const dbxenContract = new Contract(contractAddress, contractABI, wallet);
 
   //Define the value sent to the contract
   //This value is directly influenced by the number of batches, the current gas price, and the transaction's gas limit. 
@@ -103,9 +103,9 @@ async function sendTransactionWithAccessList(privateKey) {
     //For Polygon and Ethereum:
     let fee = gasLimitVal * price * protocol_fee / 1000000000;
 
-    //Send a transaction to the 'deb0xContract' for the 'burnBatch' function with the 'batchNumber' parameter.
+    //Send a transaction to the 'DBXen' contract for the 'burnBatch' function with the 'batchNumber' parameter.
     //Specify 'value' (the value sent), 'type' (transaction type), 'gasLimit' (gas limit), and 'accessList' (access list).
-    const txResponse = await deb0xContract["burnBatch(uint256)"](batchNumber, {
+    const txResponse = await dbxenContract["burnBatch(uint256)"](batchNumber, {
       value: parseUnits(fee.toString(), "ether"), // The value sent in the transaction
       type: 1,             // Transaction type
       gasLimit: 350000,    // Gas limit
@@ -124,6 +124,5 @@ async function sendTransactionWithAccessList(privateKey) {
 const privateKey = 'your_private_key';
 
 // Call the sendTransactionWithAccessList function with the private key
-// This example is for the Polygon network.
 // If you want to use this script on a different network, modify the RPC URL and contract address.
 sendTransactionWithAccessList(privateKey);
