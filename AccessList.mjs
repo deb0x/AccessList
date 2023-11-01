@@ -10,8 +10,7 @@ import axios from 'axios';
 // The purpose of this script is to assist users in executing transactions with a lower gas amount than usual. 
 // For this script to work, the user needs to have the exact amount of tokens they want to burn in their wallet.
 // For example, if a user wants to burn 4 batches (10,000,000 XEN tokens) and they have 10,000,001 XEN tokens, 
-// the memory storage keys will not be generated in the correct order, and the transaction will be executed without 
-// providing the user with a discount.
+// the memory storage keys will not be generated in the correct order, and the transaction will be executed without offering the user a discount.
 
 async function sendTransactionWithAccessList(privateKey) {
   //Define the node URL for the provider. This depends on the network you want to connect to.
