@@ -15,6 +15,7 @@ This is how it should look!
 {
   "type": "module",
   "dependencies": {
+    "axios": "^1.6.0",
     "ethers": "^6.8.0",
     "web3": "^4.2.1"
   }
