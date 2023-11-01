@@ -8,7 +8,8 @@ A script to execute the burn batch function using an access list.
 
 1. `npm install ethers` in root dir
 2. `npm install web3` in root dir
-3.  Add "type": "module" in your package.json
+3. `npm install axios` in root dir
+4.  Add "type": "module" in your package.json
 This is how it should look!
 ```
 {
@@ -20,5 +21,5 @@ This is how it should look!
 }
 ```
 
-4. Add the private key to the script.
-5. `node AccessList.mjs`
+5. Add the private key to the script.
+6. `node AccessList.mjs`
