@@ -16,7 +16,7 @@ async function sendTransactionWithAccessList(privateKey) {
   //Define the node URL for the provider. This depends on the network you want to connect to.
   //Ethereum: https://mainnet.infura.io/v3/your_infura_key (another rpc can be used)
   //Pulse: https://rpc.pulsechain.com (another rpc can be used)
-  const nodeUrl = 'https://rpc-mainnet.maticvigil.com';
+  const nodeUrl = "https://polygon-pokt.nodies.app";
 
   // Create a provider using the node URL and a wallet using a private key
   const provider = new JsonRpcProvider(nodeUrl);
@@ -63,6 +63,8 @@ async function sendTransactionWithAccessList(privateKey) {
 
   //Extract the access list from the result
   let accessList = accessListResult.accessList;
+  console.log("Access list: ")
+  console.log(accessList)
   //Create a contract instance using the contract address and ABI
   const dbxenContract = new Contract(contractAddress, contractABI, wallet);
 
@@ -72,7 +74,7 @@ async function sendTransactionWithAccessList(privateKey) {
   //Price URL: 
   //Ethereum: https://mainnet.infura.io/v3/your_infura_key (another rpc can be used)
   //Pulse: https://rpc.pulsechain.com (another rpc can be used)
-  let priceURL = "https://rpc-mainnet.maticvigil.com";
+  let priceURL = "https://polygon-pokt.nodies.app";
   let method = 'POST';
   const options = {
       method: method,
@@ -102,7 +104,6 @@ async function sendTransactionWithAccessList(privateKey) {
     //let fee = gasLimitVal * price * 300 * protocol_fee / 1000000000;
     //For Polygon and Ethereum:
     let fee = gasLimitVal * price * protocol_fee / 1000000000;
-
     //Send a transaction to the 'DBXen' contract for the 'burnBatch' function with the 'batchNumber' parameter.
     //Specify 'value' (the value sent), 'type' (transaction type), 'gasLimit' (gas limit), and 'accessList' (access list).
     const txResponse = await dbxenContract["burnBatch(uint256)"](batchNumber, {
@@ -111,17 +112,18 @@ async function sendTransactionWithAccessList(privateKey) {
       gasLimit: 350000,    // Gas limit
       accessList: accessList // Access list
     });
-
     // Wait for the transaction to be confirmed and obtain a transaction receipt
     const receipt = await txResponse.wait();
 
     // Display information about the transaction receipt
-    console.log('Transaction Receipt:', receipt);
+    console.log('Transaction Receipt:')
+    console.log(receipt);
   });
 }
 
 // Define your private key
-const privateKey = 'your_private_key';
+const privateKey = "your_private_key";
+
 
 // Call the sendTransactionWithAccessList function with the private key
 // If you want to use this script on a different network, modify the RPC URL and contract address.
